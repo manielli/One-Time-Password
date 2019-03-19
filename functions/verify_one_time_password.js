@@ -10,7 +10,7 @@ module.exports = function(req, res) {
     // Compare the codes
     // Mark code as no longer being valid
     const phone = String(req.body.phone).replace(/[^\d]/g);
-    const code = parseInt(code);
+    const code = parseInt(req.body.code);
 
     admin.auth().getUser(phone)
         .then(() => {
@@ -23,14 +23,12 @@ module.exports = function(req, res) {
                 }
 
                 ref.update({ codeValid: false });
-                
+                // Return a JWT to user
+                admin.auth().createCustomToken(phone)
+                    .then( token => res.send({ token: token }));
+
             });
         })
         .catch(() => res.status(422).send({ error: err }))
-
-
-
-    // Return a JWT to user
-
 
 };
