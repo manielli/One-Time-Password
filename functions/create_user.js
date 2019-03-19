@@ -7,8 +7,10 @@ module.exports = function(req, res) {
     }
 
     // Fromat the phone number to remove dashes and parentheses'
-
+    const phone = String(req.body.phone).replace(/[^\d]/g, "");
+    
     // Create a new user account using that phone number
+
 
     // Respond to the user request, saying the account was made
 };
