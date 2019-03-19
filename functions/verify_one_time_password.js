@@ -16,6 +16,7 @@ module.exports = function(req, res) {
         .then(() => {
             const ref = admin.database().ref('users/' + phone );
             ref.on('value', snapshot => {
+                ref.off();
                 const user = snapshot.val();
 
                 if (user.code !== code || !user.codeValid) {
