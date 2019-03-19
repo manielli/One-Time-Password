@@ -20,7 +20,7 @@ module.exports = function(req, res) {
                 if (err) { return res.status(422).send(err); }
 
                 admin.database().ref('users/' + phone)
-                    .update({ code: code }, () => {
+                    .update({ code: code, codeValid: true }, () => {
                         res.send({ success: true });
                     });
             });
