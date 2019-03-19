@@ -9,7 +9,11 @@ module.exports = function(req, res) {
 
     admin.auth().getUser(phone)
         .then( userRecord => {
-            
+            const code = Math.floor( 1000 + Math.random() * 8999 );
+        })
+        .catch((err) => {
+            // res.status(422).send({ error: 'User not found' });
+            res.status(422).send({ error: err });
         });
 };
 
